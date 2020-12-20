@@ -48,11 +48,11 @@ function Board(props) {
     }
     let pos = '';
 
-    for (let i = 0; i < 8; i++) {
+    for (let i = 8; i > 0; i--) {
         isBlack = !isBlack;
         for (let j = 0; j < 8; j++) {
-            pos = letters[j] + (i + 1);
-            tiles.unshift(
+            pos = letters[j] + i;
+            tiles.push(
                 <Tile key={pos} isBlack={isBlack} position={pos}>
                     {initialPositions[pos]}
                 </Tile>
