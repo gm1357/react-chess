@@ -3,8 +3,9 @@ import './Tile.css';
 function Tile(props) {
     return (
         <div 
-            className={props.isBlack ? 'black' : 'white'} 
+            className={`piece ${props.isBlack ? 'black' : 'white'}`} 
             id={props.position}>
+            {props.children}
         </div>
     )
 }

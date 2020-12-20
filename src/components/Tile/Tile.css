@@ -1,7 +1,13 @@
+.piece {
+    display: grid;
+    place-content: center;
+    font-size: 2.5em;
+}
+
 .black {
-    background-color: black;
+    background-color: #b88b4a;
 }
 
 .white {
-    background-color: white;
+    background-color: #e3c16f;
 }
