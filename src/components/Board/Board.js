@@ -10,6 +10,7 @@ import { useState } from 'react';
 
 
 function Board(props) {
+    const [isBlackTurn, setIsBlackTurn] = useState(false);
     const [pieceSelected, setPieceSelected] = useState(null);
     const [pieceSelectedPosition, setPieceSelectedPosition] = useState('');
     const [picesPositions, setPiecesPositions] = useState({
@@ -47,7 +48,7 @@ function Board(props) {
         h1: { piece: <Rook isBlack={false}></Rook>, selected: false },
     });
 
-    let isBlack = true;
+    let isBlackTile = true;
     const tiles = [];
     const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
@@ -58,6 +59,9 @@ function Board(props) {
                 [pieceSelectedPosition]: null,
                 [position]: { piece: pieceSelected, selected: false }
             });
+            if (pieceSelectedPosition !== position) {
+                setIsBlackTurn(!isBlackTurn);
+            }
             setPieceSelected(null);
             setPieceSelectedPosition('');
         } else {
@@ -74,23 +78,31 @@ function Board(props) {
 
     let pos = '';
     for (let i = 8; i > 0; i--) {
-        isBlack = !isBlack;
+        isBlackTile = !isBlackTile;
         for (let j = 0; j < 8; j++) {
             pos = letters[j] + i;
             const selected = picesPositions[pos]?.selected;
             const piece = picesPositions[pos]?.piece;
+
+            let isValidMove = false;
+            if (!pieceSelected) {
+                isValidMove = piece != null && piece?.props.isBlack === isBlackTurn;
+            } else {
+                isValidMove = piece == null || piece?.props.isBlack !== isBlackTurn;
+            }
+
             tiles.push(
                 <Tile
                     key={pos}
-                    isBlack={isBlack}
+                    isBlackTile={isBlackTile}
                     position={pos}
                     isSelected={selected}
-                    isValid={piece != null}
+                    isValid={isValidMove}
                     handleClick={handleClick}>
                     {piece}
                 </Tile>
             );
-            isBlack = !isBlack;
+            isBlackTile = !isBlackTile;
         }
     }
 

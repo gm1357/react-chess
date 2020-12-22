@@ -1,12 +1,16 @@
 import './Tile.css';
 
 function Tile(props) {
-    const handleClick = props.handleClick.bind(null, props.position, props.children);
+    const handleClick = () => {
+        if (props.isValid) {
+            props.handleClick(props.position, props.children)
+        }
+    };
     return (
         <div 
             className={`
                 piece
-                ${props.isBlack ? 'black' : 'white'}
+                ${props.isBlackTile ? 'black' : 'white'}
                 ${props.isSelected ? 'selected' : ''}
                 ${props.isValid ? 'valid' : ''}
             `}
