@@ -9,7 +9,7 @@ import King from '../King/King';
 import { useState } from 'react';
 
 
-function Board(props) {
+function Board() {
     const [isBlackTurn, setIsBlackTurn] = useState(false);
     const [pieceSelected, setPieceSelected] = useState(null);
     const [pieceSelectedPosition, setPieceSelectedPosition] = useState('');
@@ -52,7 +52,7 @@ function Board(props) {
     const tiles = [];
     const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
-    const handleClick = (position, piece) => {
+    const handleClick = (position: string, piece: any) => {
         if (pieceSelected) {
             setPiecesPositions({
                 ...picesPositions,
@@ -76,11 +76,15 @@ function Board(props) {
         }
     };
 
-    let pos = '';
-    for (let i = 8; i > 0; i--) {
+    const [fileSelected, rankSelected] = pieceSelectedPosition
+        .split('')
+        .map(value => parseInt(value));
+
+    let pos: keyof typeof picesPositions;
+    for (let rank = 8; rank > 0; rank--) {
         isBlackTile = !isBlackTile;
-        for (let j = 0; j < 8; j++) {
-            pos = letters[j] + i;
+        for (let file = 0; file < 8; file++) {
+            pos = (letters[file] + rank) as keyof typeof picesPositions;
             const selected = picesPositions[pos]?.selected;
             const piece = picesPositions[pos]?.piece;
 
@@ -88,7 +92,7 @@ function Board(props) {
             if (!pieceSelected) {
                 isValidMove = piece != null && piece?.props.isBlack === isBlackTurn;
             } else {
-                isValidMove = piece == null || piece?.props.isBlack !== isBlackTurn;
+                isValidMove = (piece == null || piece?.props.isBlack !== isBlackTurn) && rankSelected + 1 === rank;
             }
 
             tiles.push(

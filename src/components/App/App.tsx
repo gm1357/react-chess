@@ -1,7 +1,7 @@
 import Board from '../Board/Board';
 import './App.css';
 
-function App(props) {
+function App() {
   return (
     <div className="App">
       <Board></Board>

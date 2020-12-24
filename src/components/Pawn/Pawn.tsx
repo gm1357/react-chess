@@ -1,7 +1,7 @@
 import Piece from "../Piece/Piece";
 import * as pieces from '../../constants/pieces'
 
-function Pawn(props) {
+function Pawn(props: any) {
     return <Piece pieceName={props.isBlack ? pieces.BLACK_PAWN : pieces.WHITE_PAWN}></Piece>
 }
 

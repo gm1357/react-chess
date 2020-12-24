@@ -1,4 +1,4 @@
-function Piece(props) {
+function Piece(props: any) {
     return (
         <span dangerouslySetInnerHTML={{__html: `${props.pieceName}`}}></span>
     );

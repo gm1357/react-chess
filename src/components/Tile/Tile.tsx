@@ -1,6 +1,6 @@
 import './Tile.css';
 
-function Tile(props) {
+function Tile(props: any) {
     const handleClick = () => {
         if (props.isValid) {
             props.handleClick(props.position, props.children)
