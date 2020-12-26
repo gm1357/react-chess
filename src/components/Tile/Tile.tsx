@@ -13,10 +13,12 @@ function Tile(props: any) {
                 ${props.isBlackTile ? 'black' : 'white'}
                 ${props.isSelected ? 'selected' : ''}
                 ${props.isValid ? 'valid' : ''}
+                ${props.pieceSelected ? 'on-selection' : ''}
             `}
             id={props.position}
             onClick={handleClick}>
             {props.children}
+            {!props.children ? <span className="circle"></span> : ''}
         </div>
     )
 }

@@ -53,7 +53,7 @@ function getPawnValidMoves(selectedPiecePosition: TilePosition, isBlack: boolean
         rank: selectedPiecePosition.rank + operator
     };
     tileString = positionUtils.getString(tile);
-    if (piecesPosition.some(piece => piece.position === tileString)) {
+    if (piecesPosition.some(piece => piece.position === tileString && piece.isBlack !== isBlackTurn)) {
         validMoves.push(tileString);
     }
     tile = {

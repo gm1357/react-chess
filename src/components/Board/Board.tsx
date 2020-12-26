@@ -95,6 +95,7 @@ function Board() {
                     isSelected={selected}
                     // eslint-disable-next-line
                     isValid={validMoves?.some(tile => tile === pos)}
+                    pieceSelected={pieceSelected !== null}
                     handleClick={handleClick}>
                     {piece}
                 </Tile>
