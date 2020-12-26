@@ -82,6 +82,7 @@ function Board() {
         isBlackTile = !isBlackTile;
         for (let file = 0; file < 8; file++) {
             pos = (FilesLetters[file] + rank) as keyof typeof picesPositions;
+            // eslint-disable-next-line
             const currentTile = picesPositions.find(tile => tile.position === pos);
             const selected = currentTile?.selected;
             const piece = currentTile?.piece;
@@ -92,6 +93,7 @@ function Board() {
                     isBlackTile={isBlackTile}
                     position={pos}
                     isSelected={selected}
+                    // eslint-disable-next-line
                     isValid={validMoves?.some(tile => tile === pos)}
                     handleClick={handleClick}>
                     {piece}
