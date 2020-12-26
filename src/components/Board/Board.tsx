@@ -7,58 +7,58 @@ import Bishop from '../Bishop/Bishop';
 import Queen from '../Queen/Queen';
 import King from '../King/King';
 import { useState } from 'react';
+import { FilesLetters } from '../../constants/filesLetters';
+import { TileInformation } from '../../models/tileInformation';
+import getValidMoves from '../../utils/getValidMoves';
 
 
 function Board() {
     const [isBlackTurn, setIsBlackTurn] = useState(false);
-    const [pieceSelected, setPieceSelected] = useState(null);
+    const [pieceSelected, setPieceSelected] = useState<JSX.Element | null>(null);
     const [pieceSelectedPosition, setPieceSelectedPosition] = useState('');
-    const [picesPositions, setPiecesPositions] = useState({
-        a8: { piece: <Rook isBlack={true}></Rook>, selected: false} ,
-        b8: { piece: <Knight isBlack={true}></Knight>, selected: false },
-        c8: { piece: <Bishop isBlack={true}></Bishop>, selected: false },
-        d8: { piece: <Queen isBlack={true}></Queen>, selected: false },
-        e8: { piece: <King isBlack={true}></King>, selected: false },
-        f8: { piece: <Bishop isBlack={true}></Bishop>, selected: false },
-        g8: { piece: <Knight isBlack={true}></Knight>, selected: false },
-        h8: { piece: <Rook isBlack={true}></Rook>, selected: false },
-        a7: { piece: <Pawn isBlack={true}></Pawn>, selected: false },
-        b7: { piece: <Pawn isBlack={true}></Pawn>, selected: false },
-        c7: { piece: <Pawn isBlack={true}></Pawn>, selected: false },
-        d7: { piece: <Pawn isBlack={true}></Pawn>, selected: false },
-        e7: { piece: <Pawn isBlack={true}></Pawn>, selected: false },
-        f7: { piece: <Pawn isBlack={true}></Pawn>, selected: false },
-        g7: { piece: <Pawn isBlack={true}></Pawn>, selected: false },
-        h7: { piece: <Pawn isBlack={true}></Pawn>, selected: false },
-        a2: { piece: <Pawn isBlack={false}></Pawn>, selected: false },
-        b2: { piece: <Pawn isBlack={false}></Pawn>, selected: false },
-        c2: { piece: <Pawn isBlack={false}></Pawn>, selected: false },
-        d2: { piece: <Pawn isBlack={false}></Pawn>, selected: false },
-        e2: { piece: <Pawn isBlack={false}></Pawn>, selected: false },
-        f2: { piece: <Pawn isBlack={false}></Pawn>, selected: false },
-        g2: { piece: <Pawn isBlack={false}></Pawn>, selected: false },
-        h2: { piece: <Pawn isBlack={false}></Pawn>, selected: false },
-        a1: { piece: <Rook isBlack={false}></Rook>, selected: false },
-        b1: { piece: <Knight isBlack={false}></Knight>, selected: false },
-        c1: { piece: <Bishop isBlack={false}></Bishop>, selected: false },
-        d1: { piece: <Queen isBlack={false}></Queen>, selected: false },
-        e1: { piece: <King isBlack={false}></King>, selected: false },
-        f1: { piece: <Bishop isBlack={false}></Bishop>, selected: false },
-        g1: { piece: <Knight isBlack={false}></Knight>, selected: false },
-        h1: { piece: <Rook isBlack={false}></Rook>, selected: false },
-    });
+    const [picesPositions, setPiecesPositions] = useState<TileInformation[]>([
+        { position: 'a8', piece: <Rook isBlack={true}></Rook>, selected: false, isBlack: true },
+        { position: 'b8', piece: <Knight isBlack={true}></Knight>, selected: false, isBlack: true },
+        { position: 'c8', piece: <Bishop isBlack={true}></Bishop>, selected: false, isBlack: true },
+        { position: 'd8', piece: <Queen isBlack={true}></Queen>, selected: false, isBlack: true },
+        { position: 'e8', piece: <King isBlack={true}></King>, selected: false, isBlack: true },
+        { position: 'f8', piece: <Bishop isBlack={true}></Bishop>, selected: false, isBlack: true },
+        { position: 'g8', piece: <Knight isBlack={true}></Knight>, selected: false, isBlack: true },
+        { position: 'h8', piece: <Rook isBlack={true}></Rook>, selected: false, isBlack: true },
+        { position: 'a7', piece: <Pawn isBlack={true}></Pawn>, selected: false, isBlack: true },
+        { position: 'b7', piece: <Pawn isBlack={true}></Pawn>, selected: false, isBlack: true },
+        { position: 'c7', piece: <Pawn isBlack={true}></Pawn>, selected: false, isBlack: true },
+        { position: 'd7', piece: <Pawn isBlack={true}></Pawn>, selected: false, isBlack: true },
+        { position: 'e7', piece: <Pawn isBlack={true}></Pawn>, selected: false, isBlack: true },
+        { position: 'f7', piece: <Pawn isBlack={true}></Pawn>, selected: false, isBlack: true },
+        { position: 'g7', piece: <Pawn isBlack={true}></Pawn>, selected: false, isBlack: true },
+        { position: 'h7', piece: <Pawn isBlack={true}></Pawn>, selected: false, isBlack: true },
+        { position: 'a2', piece: <Pawn isBlack={false}></Pawn>, selected: false, isBlack: false },
+        { position: 'b2', piece: <Pawn isBlack={false}></Pawn>, selected: false, isBlack: false },
+        { position: 'c2', piece: <Pawn isBlack={false}></Pawn>, selected: false, isBlack: false },
+        { position: 'd2', piece: <Pawn isBlack={false}></Pawn>, selected: false, isBlack: false },
+        { position: 'e2', piece: <Pawn isBlack={false}></Pawn>, selected: false, isBlack: false },
+        { position: 'f2', piece: <Pawn isBlack={false}></Pawn>, selected: false, isBlack: false },
+        { position: 'g2', piece: <Pawn isBlack={false}></Pawn>, selected: false, isBlack: false },
+        { position: 'h2', piece: <Pawn isBlack={false}></Pawn>, selected: false, isBlack: false },
+        { position: 'a1', piece: <Rook isBlack={false}></Rook>, selected: false, isBlack: false },
+        { position: 'b1', piece: <Knight isBlack={false}></Knight>, selected: false, isBlack: false },
+        { position: 'c1', piece: <Bishop isBlack={false}></Bishop>, selected: false, isBlack: false },
+        { position: 'd1', piece: <Queen isBlack={false}></Queen>, selected: false, isBlack: false },
+        { position: 'e1', piece: <King isBlack={false}></King>, selected: false, isBlack: false },
+        { position: 'f1', piece: <Bishop isBlack={false}></Bishop>, selected: false, isBlack: false },
+        { position: 'g1', piece: <Knight isBlack={false}></Knight>, selected: false, isBlack: false },
+        { position: 'h1', piece: <Rook isBlack={false}></Rook>, selected: false, isBlack: false },
+    ]);
 
     let isBlackTile = true;
     const tiles = [];
-    const letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
     const handleClick = (position: string, piece: any) => {
         if (pieceSelected) {
-            setPiecesPositions({
-                ...picesPositions,
-                [pieceSelectedPosition]: null,
-                [position]: { piece: pieceSelected, selected: false }
-            });
+            const currentPiecesPosition = picesPositions.filter(piece => piece.position !== pieceSelectedPosition && piece.position !== position);
+            currentPiecesPosition.push({ position: position, piece: pieceSelected, selected: false, isBlack: pieceSelected.props.isBlack });
+            setPiecesPositions(currentPiecesPosition);
             if (pieceSelectedPosition !== position) {
                 setIsBlackTurn(!isBlackTurn);
             }
@@ -68,32 +68,23 @@ function Board() {
             if (piece) {
                 setPieceSelected(piece);
                 setPieceSelectedPosition(position);
-                setPiecesPositions({
-                    ...picesPositions,
-                    [position]: { piece: piece, selected: true }
-                });
+                const currentPiecesPosition = picesPositions.filter(piece => piece.position !== position);
+                currentPiecesPosition.push({ position: position, piece: piece, selected: true, isBlack: piece.props.isBlack });
+                setPiecesPositions(currentPiecesPosition);
             }
         }
     };
 
-    const [fileSelected, rankSelected] = pieceSelectedPosition
-        .split('')
-        .map(value => parseInt(value));
+    const validMoves = getValidMoves(picesPositions, picesPositions.find(piece => piece.position === pieceSelectedPosition), isBlackTurn);
 
     let pos: keyof typeof picesPositions;
     for (let rank = 8; rank > 0; rank--) {
         isBlackTile = !isBlackTile;
         for (let file = 0; file < 8; file++) {
-            pos = (letters[file] + rank) as keyof typeof picesPositions;
-            const selected = picesPositions[pos]?.selected;
-            const piece = picesPositions[pos]?.piece;
-
-            let isValidMove = false;
-            if (!pieceSelected) {
-                isValidMove = piece != null && piece?.props.isBlack === isBlackTurn;
-            } else {
-                isValidMove = (piece == null || piece?.props.isBlack !== isBlackTurn) && rankSelected + 1 === rank;
-            }
+            pos = (FilesLetters[file] + rank) as keyof typeof picesPositions;
+            const currentTile = picesPositions.find(tile => tile.position === pos);
+            const selected = currentTile?.selected;
+            const piece = currentTile?.piece;
 
             tiles.push(
                 <Tile
@@ -101,7 +92,7 @@ function Board() {
                     isBlackTile={isBlackTile}
                     position={pos}
                     isSelected={selected}
-                    isValid={isValidMove}
+                    isValid={validMoves?.some(tile => tile === pos)}
                     handleClick={handleClick}>
                     {piece}
                 </Tile>
