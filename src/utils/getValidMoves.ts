@@ -1,3 +1,4 @@
+import Pawn from "../components/Pawn/Pawn";
 import { ARRAY_OF_TILES } from "../constants/arrayOfTiles";
 import { TileInformation } from "../models/tileInformation";
 import { TilePosition } from "../models/tilePosition";
@@ -8,13 +9,13 @@ function getValidMoves(
     selectedPieceTile: TileInformation | undefined,
     isBlackTurn: boolean
 ) {
-    const pieceType = selectedPieceTile?.piece?.type.name;
+    const pieceType = selectedPieceTile?.piece?.type;
     const selectedPiecePosition = positionUtils.splitString(selectedPieceTile?.position);
     const isBlack = selectedPieceTile?.isBlack;
 
     if (pieceType) {
         switch (pieceType) {
-            case 'Pawn':
+            case Pawn:
                 return getPawnValidMoves(selectedPiecePosition, isBlack, piecesPosition, isBlackTurn);
             default:
                 return ARRAY_OF_TILES;
