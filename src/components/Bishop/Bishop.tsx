@@ -1,8 +1,8 @@
-import Piece from "../Piece/Piece";
-import * as pieces from '../../constants/pieces'
+import Piece from "../Piece";
+import { Pieces } from '../../constants'
 
 function Bishop(props: any) {
-    return <Piece pieceName={props.isBlack ? pieces.BLACK_BISHOP : pieces.WHITE_BISHOP}></Piece>
+    return <Piece pieceName={props.isBlack ? Pieces.BLACK_BISHOP : Pieces.WHITE_BISHOP}></Piece>
 }
 
 export default Bishop;

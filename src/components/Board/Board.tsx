@@ -1,15 +1,16 @@
-import Tile from '../Tile/Tile';
-import './Board.css';
-import Pawn from '../Pawn/Pawn';
-import Rook from '../Rook/Rook';
-import Knight from '../Knight/Knight';
-import Bishop from '../Bishop/Bishop';
-import Queen from '../Queen/Queen';
-import King from '../King/King';
 import { useState } from 'react';
-import { FilesLetters } from '../../constants/filesLetters';
-import { TileInformation } from '../../models/tileInformation';
-import getValidMoves from '../../utils/getValidMoves';
+
+import './Board.css';
+import Tile from '../Tile';
+import Pawn from '../Pawn';
+import Rook from '../Rook';
+import Knight from '../Knight';
+import Bishop from '../Bishop';
+import Queen from '../Queen';
+import King from '../King';
+import { FilesLetters } from '../../constants';
+import { TileInformation } from '../../models';
+import { getValidMoves } from '../../utils';
 
 
 function Board() {

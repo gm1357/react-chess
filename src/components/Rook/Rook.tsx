@@ -1,8 +1,8 @@
-import Piece from "../Piece/Piece";
-import * as pieces from '../../constants/pieces'
+import Piece from "../Piece";
+import { Pieces } from '../../constants'
 
 function Rook(props: any) {
-    return <Piece pieceName={props.isBlack ? pieces.BLACK_ROOK : pieces.WHITE_ROOK}></Piece>
+    return <Piece pieceName={props.isBlack ? Pieces.BLACK_ROOK : Pieces.WHITE_ROOK}></Piece>
 }
 
 export default Rook;

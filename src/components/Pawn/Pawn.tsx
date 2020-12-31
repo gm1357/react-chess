@@ -1,8 +1,8 @@
-import Piece from "../Piece/Piece";
-import * as pieces from '../../constants/pieces'
+import Piece from "../Piece";
+import { Pieces } from '../../constants'
 
 function Pawn(props: any) {
-    return <Piece pieceName={props.isBlack ? pieces.BLACK_PAWN : pieces.WHITE_PAWN}></Piece>
+    return <Piece pieceName={props.isBlack ? Pieces.BLACK_PAWN : Pieces.WHITE_PAWN}></Piece>
 }
 
 export default Pawn;

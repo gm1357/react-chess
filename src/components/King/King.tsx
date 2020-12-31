@@ -1,8 +1,8 @@
-import Piece from "../Piece/Piece";
-import * as pieces from '../../constants/pieces'
+import Piece from "../Piece";
+import { Pieces } from '../../constants'
 
 function King(props: any) {
-    return <Piece pieceName={props.isBlack ? pieces.BLACK_KING : pieces.WHITE_KING}></Piece>
+    return <Piece pieceName={props.isBlack ? Pieces.BLACK_KING : Pieces.WHITE_KING}></Piece>
 }
 
 export default King;

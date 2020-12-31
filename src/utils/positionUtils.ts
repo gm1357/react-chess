@@ -1,7 +1,7 @@
-import { FilesLetters } from "../constants/filesLetters";
-import { TilePosition } from "../models/tilePosition";
+import { FilesLetters } from "../constants";
+import { TilePosition } from "../models";
 
-export default class PositionUtils {
+export class PositionUtils {
 
     static splitString(position: string | undefined): TilePosition {
         if (position === undefined) {
