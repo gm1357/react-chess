@@ -1,5 +1,5 @@
-import { FilesLetters } from "../constants";
-import { TilePosition } from "../models";
+import { FilesLetters } from '../constants';
+import { TilePosition } from '../models';
 
 export class PositionUtils {
 

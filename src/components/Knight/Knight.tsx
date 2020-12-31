@@ -1,4 +1,4 @@
-import Piece from "../Piece";
+import Piece from '../Piece';
 import { Pieces } from '../../constants'
 
 function Knight(props: any) {
