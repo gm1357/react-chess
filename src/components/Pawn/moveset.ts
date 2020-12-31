@@ -16,7 +16,7 @@ export function getPawnMoveset(selectedPiecePosition: TilePosition, isBlack: boo
         validMoves.push(tileString);
     }
 
-    if (firstMove && validMoves.length) {
+    if (firstMove && validMoves.length > 1) {
         tile = { file: tile.file, rank: tile.rank + operator };
         tileString = PositionUtils.getString(tile);
         if (!piecesPosition.some(piece => piece.position === tileString)) {
