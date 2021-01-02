@@ -9,7 +9,7 @@ export function getPawnMoveset(
     const validMoves = [];
     validMoves.push(PositionUtils.getString(selectedPiecePosition));
     const firstMove = isBlackTurn ? selectedPiecePosition.rank === 6 : selectedPiecePosition.rank === 1;
-    const operator = (isBlackTurn ? -1 : +1);
+    const operator = isBlackTurn ? -1 : +1;
 
     let tile = {
         file: selectedPiecePosition.file,
@@ -21,29 +21,23 @@ export function getPawnMoveset(
     }
 
     if (firstMove && validMoves.length > 1) {
-        tile = { file: tile.file, rank: tile.rank + operator };
+        tile.rank += operator;
         tileString = PositionUtils.getString(tile);
         if (!piecesPosition.some(piece => piece.position === tileString)) {
             validMoves.push(tileString);
         }
     }
 
-    tile = {
-        file: selectedPiecePosition.file - 1,
-        rank: selectedPiecePosition.rank + operator
-    };
-    tileString = PositionUtils.getString(tile);
-    if (piecesPosition.some(piece => piece.position === tileString && piece.isBlack !== isBlackTurn)) {
-        validMoves.push(tileString);
-    }
-    tile = {
-        file: selectedPiecePosition.file + 1,
-        rank: selectedPiecePosition.rank + operator
-    };
-    tileString = PositionUtils.getString(tile);
-    if (piecesPosition.some(piece => piece.position === tileString && piece.isBlack !== isBlackTurn)) {
-        validMoves.push(tileString);
-    }
+    [-1, 1].forEach(atackDirection => {
+        tile = {
+            file: selectedPiecePosition.file + atackDirection,
+            rank: selectedPiecePosition.rank + operator
+        };
+        tileString = PositionUtils.getString(tile);
+        if (piecesPosition.some(piece => piece.position === tileString && piece.isBlack !== isBlackTurn)) {
+            validMoves.push(tileString);
+        }
+    });
 
     return validMoves;
 }
