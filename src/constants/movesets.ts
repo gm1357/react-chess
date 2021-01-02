@@ -1,3 +1,4 @@
+import { getBishopValidMoves } from '../components/Bishop';
 import { getKnightValidMoves } from '../components/Knight';
 import { getPawnMoveset } from '../components/Pawn';
 import { getRookValidMoves } from '../components/Rook';
@@ -7,7 +8,7 @@ export const MOVESETS = {
     [PIECE_TYPES.PAWN]: getPawnMoveset,
     [PIECE_TYPES.ROOK]: getRookValidMoves,
     [PIECE_TYPES.KNIGHT]: getKnightValidMoves,
-    [PIECE_TYPES.BISHOP]: getPawnMoveset,
+    [PIECE_TYPES.BISHOP]: getBishopValidMoves,
     [PIECE_TYPES.QUEEN]: getPawnMoveset,
     [PIECE_TYPES.KING]: getPawnMoveset,
 };

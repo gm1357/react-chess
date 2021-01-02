@@ -9,14 +9,9 @@ export function getRookValidMoves(
     const validMoves = [];
     validMoves.push(PositionUtils.getString(selectedPiecePosition));
 
-    let tile = {
-        file: selectedPiecePosition.file,
-        rank: selectedPiecePosition.rank
-    };
-
     ['rank', 'file'].forEach(line => {
-        const currentPos: number = tile[line as keyof TilePosition];
-        const staticPos = line === 'rank' ? tile.file : tile.rank;
+        const currentPos: number = selectedPiecePosition[line as keyof TilePosition];
+        const staticPos = line === 'rank' ? selectedPiecePosition.file : selectedPiecePosition.rank;
 
         [-1, 1].forEach(direction => {
             const isAscending = direction > 0;
