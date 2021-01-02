@@ -5,8 +5,11 @@ import Tile from '../Tile';
 import { FilesLetters, INITIAL_POSITIONS } from '../../constants';
 import { TileInformation } from '../../models';
 import { getValidMoves } from '../../utils';
+import { useWindowSize } from '../../hooks/useWindowSize';
 
 function Board() {
+    const size = useWindowSize();
+    const maximumSideSize = Math.min(size.width ?? 0, size.height ?? 0) * 0.9;
     const [isBlackTurn, setIsBlackTurn] = useState(false);
     const [pieceSelected, setPieceSelected] = useState<JSX.Element | null>(null);
     const [pieceSelectedPosition, setPieceSelectedPosition] = useState('');
@@ -76,7 +79,7 @@ function Board() {
     }
 
     return (
-        <div className="board">
+        <div className="board" style={{width: maximumSideSize, height: maximumSideSize}}>
             {tiles}
         </div>
     );
