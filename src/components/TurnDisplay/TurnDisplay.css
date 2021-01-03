@@ -2,9 +2,54 @@
     width: 100%;
     text-align: center;
     background-color: white;
-    font-size: 2.5em;
+    font-size: 2em;
     line-height: 2em;
     font-weight: bold;
     border-top: 4px solid #b88b4a;
     border-bottom: 4px solid #e3c16f;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    height: 2em;
+    font-family: 'Archivo Black', sans-serif;
+}
+
+.animation-turn {
+    display: flex;
+    flex-direction: column;
+}
+
+.whose-turn {
+    position: relative;
+}
+
+.whose-turn-enter {
+    top: 0px;
+}
+
+.whose-turn-enter-active {
+    animation-name: appearFromBottom;
+    animation-duration: 0.8s;
+    animation-timing-function: ease-in;
+}
+
+.whose-turn-leave {
+    top: -140px;
+    position: relative;
+}
+
+.whose-turn-leave-active {
+    animation-name: fadeToTop;
+    animation-duration: 0.8s;
+    animation-timing-function: ease-in;
+}
+
+@keyframes fadeToTop {
+    from { top: -80px; }
+    to { top: -140px; }
+}
+
+@keyframes appearFromBottom {
+    from { top: 60px; }
+    to { top: 0px; }
 }
