@@ -7,10 +7,9 @@ import { TileInformation } from '../../models';
 import { getValidMoves } from '../../utils';
 import { useWindowSize } from '../../hooks/useWindowSize';
 
-function Board() {
+function Board(props: any) {
     const size = useWindowSize();
-    const maximumSideSize = Math.min(size.width ?? 0, size.height ?? 0) * 0.9;
-    const [isBlackTurn, setIsBlackTurn] = useState(false);
+    const maximumSideSize = Math.min(size.width ?? 0, size.height ?? 0) * 0.8;
     const [pieceSelected, setPieceSelected] = useState<JSX.Element | null>(null);
     const [pieceSelectedPosition, setPieceSelectedPosition] = useState('');
     const [picesPositions, setPiecesPositions] = useState<TileInformation[]>(INITIAL_POSITIONS);
@@ -30,7 +29,7 @@ function Board() {
             });
             setPiecesPositions(newPiecesPosition);
             if (pieceSelectedPosition !== position) {
-                setIsBlackTurn(!isBlackTurn);
+                props.setTurn(!props.isBlackTurn);
             }
             setPieceSelected(null);
             setPieceSelectedPosition('');
@@ -49,7 +48,11 @@ function Board() {
         }
     };
 
-    const validMoves = getValidMoves(picesPositions, picesPositions.find(piece => piece.position === pieceSelectedPosition), isBlackTurn);
+    const validMoves = getValidMoves(
+        picesPositions,
+        picesPositions.find(piece => piece.position === pieceSelectedPosition),
+        props.isBlackTurn
+    );
 
     let pos: keyof typeof picesPositions;
     for (let rank = 8; rank > 0; rank--) {
