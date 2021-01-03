@@ -45,7 +45,7 @@
 }
 
 @keyframes fadeToTop {
-    from { top: -80px; }
+    from { top: -65px; }
     to { top: -140px; }
 }
 
