@@ -2,6 +2,8 @@
 
 A simple chess game that can be played in the browser (https://react-chess.vercel.app/), built with react, to learn and practice the framework.
 
+<img title="Sreenshot of the app" src="demo.png">
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
