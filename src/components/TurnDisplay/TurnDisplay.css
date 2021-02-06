@@ -20,25 +20,26 @@
 }
 
 .whose-turn {
-    position: relative;
+    
 }
 
 .whose-turn-enter {
+    position: relative;
     top: 0px;
 }
 
-.whose-turn-enter-active {
+.whose-turn-enter.whose-turn-enter-active {
     animation-name: appearFromBottom;
     animation-duration: 0.8s;
     animation-timing-function: ease-in;
 }
 
-.whose-turn-leave {
-    top: -140px;
+.whose-turn-exit {
     position: relative;
+    top: -140px;
 }
 
-.whose-turn-leave-active {
+.whose-turn-exit.whose-turn-exit-active {
     animation-name: fadeToTop;
     animation-duration: 0.8s;
     animation-timing-function: ease-in;

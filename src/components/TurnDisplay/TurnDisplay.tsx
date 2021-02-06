@@ -1,18 +1,21 @@
-import { CSSTransitionGroup } from 'react-transition-group';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import './TurnDisplay.css';
 
 function TurnDisplay(props: any) {
-    const whoseTurn = <span key={props.isBlackTurn} className="whose-turn">{props.isBlackTurn ? 'BLACK': 'WHITE'}</span>
+    const whoseTurn = (
+        <CSSTransition
+            key={props.isBlackTurn}
+            timeout={800}
+            classNames="whose-turn">
+            <span>{props.isBlackTurn ? 'BLACK': 'WHITE'}</span>
+        </CSSTransition>
+    );
     return (
         <span className="turn-display">
-            <CSSTransitionGroup
-                className="animation-turn"
-                transitionName="whose-turn"
-                transitionEnterTimeout={800}
-                transitionLeaveTimeout={800}>
+            <TransitionGroup className="animation-turn">
                 {whoseTurn}
-            </CSSTransitionGroup>
+            </TransitionGroup>
             <span>'S TURN</span>
         </span>
     );
