@@ -1,5 +1,5 @@
 import Bishop from './Bishop';
-import { getBishopValidMoves } from './moveset';
+import { BishopLogic } from './bishopLogic';
 
 export default Bishop;
-export { getBishopValidMoves };
+export { BishopLogic };

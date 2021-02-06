@@ -1,5 +1,5 @@
 import Queen from './Queen';
-import { getQueenMoveset } from './moveset';
+import { QueenLogic } from './queenLogic';
 
 export default Queen;
-export { getQueenMoveset };
+export { QueenLogic };

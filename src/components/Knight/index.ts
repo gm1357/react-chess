@@ -1,5 +1,5 @@
 import Knight from './Knight';
-import { getKnightValidMoves } from './moveset';
+import { KinghtLogic } from './knightLogic';
 
 export default Knight;
-export { getKnightValidMoves };
+export { KinghtLogic };

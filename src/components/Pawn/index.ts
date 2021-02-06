@@ -1,5 +1,5 @@
 import Pawn from './Pawn';
-import { getPawnMoveset } from './moveset'
+import { PawnLogic } from './pawnLogic';
 
 export default Pawn;
-export { getPawnMoveset };
+export { PawnLogic };

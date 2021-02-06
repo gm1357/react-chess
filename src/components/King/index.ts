@@ -1,5 +1,5 @@
 import King from './King';
-import { getKingMoveset } from './moveset';
+import { KingLogic } from './kingLogic';
 
 export default King;
-export { getKingMoveset };
+export { KingLogic };

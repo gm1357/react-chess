@@ -1,5 +1,5 @@
 import Rook from './Rook';
-import { getRookValidMoves } from './moveset';
+import { RookLogic } from './rookLogic';
 
 export default Rook;
-export { getRookValidMoves };
+export { RookLogic };
