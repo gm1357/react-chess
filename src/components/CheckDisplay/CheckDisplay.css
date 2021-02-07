@@ -1,0 +1,35 @@
+.display-wrapper {
+    position: absolute;
+    width: 100%;
+}
+
+.check-display {
+    position: absolute;
+    font-size: 5em;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    text-align: center;
+    background-color: white;
+    border-top: 4px solid #b88b4a;
+    border-bottom: 4px solid #e3c16f;
+    font-family: 'Archivo Black', sans-serif;
+}
+
+.show-check-enter {
+    opacity: 0;
+}
+
+.show-check-enter.show-check-enter-active {
+    opacity: 1;
+    transition: opacity 800ms;
+}
+
+.show-check-exit {
+    opacity: 1;
+}
+
+.show-check-exit.show-check-exit-active {
+    opacity: 0;
+    transition: opacity 800ms;
+}

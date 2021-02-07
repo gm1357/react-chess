@@ -19,10 +19,6 @@
     flex-direction: column;
 }
 
-.whose-turn {
-    
-}
-
 .whose-turn-enter {
     position: relative;
     top: 0px;

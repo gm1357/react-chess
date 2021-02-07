@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import './Board.css';
 import Tile from '../Tile';
@@ -6,6 +6,7 @@ import { FilesLetters, INITIAL_POSITIONS } from '../../constants';
 import { TileInformation } from '../../models';
 import { getValidMoves } from '../../utils';
 import { useWindowSize } from '../../hooks/useWindowSize';
+import { isCheck } from '../../utils/isCheck';
 
 function Board(props: any) {
     const size = useWindowSize();
@@ -13,6 +14,8 @@ function Board(props: any) {
     const [pieceSelected, setPieceSelected] = useState<JSX.Element | null>(null);
     const [pieceSelectedPosition, setPieceSelectedPosition] = useState('');
     const [picesPositions, setPiecesPositions] = useState<TileInformation[]>(INITIAL_POSITIONS);
+    const [lastMovePosition, setLastMovePosition] = useState('');
+    const {setCheck, isBlackTurn} = props;
     let isBlackTile = true;
     const tiles = [];
 
@@ -30,6 +33,7 @@ function Board(props: any) {
             setPiecesPositions(newPiecesPosition);
             if (pieceSelectedPosition !== position) {
                 props.setTurn(!props.isBlackTurn);
+                setLastMovePosition(position);
             }
             setPieceSelected(null);
             setPieceSelectedPosition('');
@@ -53,6 +57,16 @@ function Board(props: any) {
         picesPositions.find(piece => piece.position === pieceSelectedPosition),
         props.isBlackTurn
     );
+
+    useEffect(() => {
+        setCheck(
+            isCheck(
+                picesPositions,
+                isBlackTurn,
+                lastMovePosition
+            )
+        );
+    });
 
     let pos: keyof typeof picesPositions;
     for (let rank = 8; rank > 0; rank--) {
