@@ -1,5 +1,5 @@
 import Bishop from './Bishop';
-import { BishopLogic } from './bishopLogic';
+import { BishopController } from './bishopController';
 
 export default Bishop;
-export { BishopLogic };
+export { BishopController };

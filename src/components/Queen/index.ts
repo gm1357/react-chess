@@ -1,5 +1,5 @@
 import Queen from './Queen';
-import { QueenLogic } from './queenLogic';
+import { QueenController } from './queenController';
 
 export default Queen;
-export { QueenLogic };
+export { QueenController };

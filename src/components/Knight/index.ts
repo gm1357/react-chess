@@ -1,5 +1,5 @@
 import Knight from './Knight';
-import { KinghtLogic } from './knightLogic';
+import { KnightController } from './knightController';
 
 export default Knight;
-export { KinghtLogic };
+export { KnightController };

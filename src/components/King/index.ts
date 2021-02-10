@@ -1,5 +1,5 @@
 import King from './King';
-import { KingLogic } from './kingLogic';
+import { KingController } from './kingController';
 
 export default King;
-export { KingLogic };
+export { KingController };

@@ -1,8 +1,11 @@
-import { PieceLogic } from '../../interfaces/pieceLogic';
+import { PieceController } from '../../models/pieceController';
 import { TileInformation, TilePosition } from '../../models';
 import { PositionUtils } from '../../utils';
+import { PIECE_TYPES } from '../../constants';
 
-export class PawnLogic implements PieceLogic {
+export class PawnController implements PieceController {
+
+    public pieceType = PIECE_TYPES.PAWN;
 
     public getValidMoves(
         selectedPiecePosition: TilePosition,

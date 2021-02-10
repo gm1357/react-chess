@@ -1,9 +1,9 @@
-import { PIECE_TYPES } from '../constants';
+import { PieceController } from './pieceController';
 
 export interface TileInformation {
     position: string,
-    piece?: JSX.Element,
-    pieceType?: PIECE_TYPES,
+    piece: JSX.Element,
+    pieceController: PieceController,
     isBlack: boolean,
     selected: boolean
 }

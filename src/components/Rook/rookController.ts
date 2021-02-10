@@ -1,8 +1,11 @@
-import { PieceLogic } from '../../interfaces/pieceLogic';
+import { PieceController } from '../../models/pieceController';
 import { TileInformation, TilePosition } from '../../models';
 import { PositionUtils } from '../../utils';
+import { PIECE_TYPES } from '../../constants';
 
-export class RookLogic implements PieceLogic {
+export class RookController implements PieceController {
+
+    public pieceType = PIECE_TYPES.QUEEN;
 
     public getValidMoves(
         selectedPiecePosition: TilePosition,

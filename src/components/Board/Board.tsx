@@ -11,7 +11,7 @@ import { isCheck } from '../../utils/isCheck';
 function Board(props: any) {
     const size = useWindowSize();
     const maximumSideSize = Math.min(size.width ?? 0, size.height ?? 0) * 0.8;
-    const [pieceSelected, setPieceSelected] = useState<JSX.Element | null>(null);
+    const [pieceElementSelected, setPieceElementSelected] = useState<JSX.Element | null>(null);
     const [pieceSelectedPosition, setPieceSelectedPosition] = useState('');
     const [picesPositions, setPiecesPositions] = useState<TileInformation[]>(INITIAL_POSITIONS);
     const [lastMovePosition, setLastMovePosition] = useState('');
@@ -20,26 +20,29 @@ function Board(props: any) {
     const tiles = [];
 
     const handleClick = (position: string, piece: any) => {
-        if (pieceSelected) {
-            const pieceType = picesPositions.find(piece => piece.position === pieceSelectedPosition)?.pieceType;
-            const newPiecesPosition = picesPositions.filter(piece => piece.position !== pieceSelectedPosition && piece.position !== position);
-            newPiecesPosition.push({
-                position: position,
-                piece: pieceSelected,
-                pieceType: pieceType,
-                selected: false,
-                isBlack: pieceSelected.props.isBlack
-            });
-            setPiecesPositions(newPiecesPosition);
-            if (pieceSelectedPosition !== position) {
-                props.setTurn(!props.isBlackTurn);
-                setLastMovePosition(position);
+        if (pieceElementSelected) {
+            const pieceSelected = picesPositions.find(piece => piece.position === pieceSelectedPosition);
+            if (pieceSelected) {
+                const pieceController = pieceSelected.pieceController;
+                const newPiecesPosition = picesPositions.filter(piece => piece.position !== pieceSelectedPosition && piece.position !== position);
+                newPiecesPosition.push({
+                    position: position,
+                    piece: pieceElementSelected,
+                    pieceController: pieceController,
+                    selected: false,
+                    isBlack: pieceElementSelected.props.isBlack
+                });
+                setPiecesPositions(newPiecesPosition);
+                if (pieceSelectedPosition !== position) {
+                    props.setTurn(!props.isBlackTurn);
+                    setLastMovePosition(position);
+                }
             }
-            setPieceSelected(null);
+            setPieceElementSelected(null);
             setPieceSelectedPosition('');
         } else {
             if (piece) {
-                setPieceSelected(piece);
+                setPieceElementSelected(piece);
                 setPieceSelectedPosition(position);
                 const newPiecesPosition = picesPositions.map(piece => {
                     if (piece.position === position) {
@@ -86,7 +89,7 @@ function Board(props: any) {
                     isSelected={selected}
                     // eslint-disable-next-line
                     isValid={validMoves?.some((tile: any) => tile === pos)}
-                    pieceSelected={pieceSelected !== null}
+                    pieceSelected={pieceElementSelected !== null}
                     handleClick={handleClick}>
                     {piece}
                 </Tile>

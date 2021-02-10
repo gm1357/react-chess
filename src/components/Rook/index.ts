@@ -1,5 +1,5 @@
 import Rook from './Rook';
-import { RookLogic } from './rookLogic';
+import { RookController } from './rookController';
 
 export default Rook;
-export { RookLogic };
+export { RookController };

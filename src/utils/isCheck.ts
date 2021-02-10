@@ -1,5 +1,5 @@
 import { PositionUtils } from ".";
-import { MOVESETS, PIECE_TYPES } from "../constants";
+import { PIECE_TYPES } from "../constants";
 import { TileInformation } from "../models";
 
 export function isCheck(
@@ -8,14 +8,14 @@ export function isCheck(
     lastPieceMovedPosition: string
 ) {
     const kingPosition = piecesPosition
-        .find(piece => piece.isBlack === isBlackTurn && piece.pieceType === PIECE_TYPES.KING)
+        .find(piece => piece.isBlack === isBlackTurn && piece.pieceController.pieceType === PIECE_TYPES.KING)
         ?.position;
-    const lastPieceMoved = piecesPosition
+    const pieceController = piecesPosition
         .find(piece => piece.isBlack !== isBlackTurn && piece.position === lastPieceMovedPosition)
-        ?.pieceType;
+        ?.pieceController;
 
-    if (lastPieceMoved !== undefined && kingPosition) {
-        const lastPieceNextPossibleMoves = new MOVESETS[lastPieceMoved]().getValidMoves(
+    if (pieceController !== undefined && kingPosition !== undefined) {
+        const lastPieceNextPossibleMoves = pieceController.getValidMoves(
             PositionUtils.splitString(lastPieceMovedPosition),
             piecesPosition,
             !isBlackTurn

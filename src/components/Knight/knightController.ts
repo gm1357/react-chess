@@ -1,8 +1,11 @@
-import { PieceLogic } from '../../interfaces/pieceLogic';
+import { PieceController } from '../../models/pieceController';
 import { TileInformation, TilePosition } from '../../models';
 import { PositionUtils } from '../../utils';
+import { PIECE_TYPES } from '../../constants';
 
-export class KinghtLogic implements PieceLogic {
+export class KnightController implements PieceController {
+
+    public pieceType = PIECE_TYPES.KNIGHT;
 
     public getValidMoves(
         selectedPiecePosition: TilePosition,
