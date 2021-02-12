@@ -7,6 +7,11 @@ export class RookController implements PieceController {
 
     public pieceType = PIECE_TYPES.QUEEN;
 
+    constructor(
+        public isBlack: boolean,
+        public selected: boolean
+    ) {}
+
     public getValidMoves(
         selectedPiecePosition: TilePosition,
         piecesPosition: TileInformation[],
@@ -31,7 +36,7 @@ export class RookController implements PieceController {
 
                     const pieceOnTile = piecesPosition.find(piece => piece.position === movePosition)
                     if (pieceOnTile) {
-                        if (pieceOnTile.isBlack !== isBlackTurn) {
+                        if (pieceOnTile.pieceController.isBlack !== isBlackTurn) {
                             validMoves.push(movePosition);
                         }
                         break;

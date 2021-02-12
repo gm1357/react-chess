@@ -7,6 +7,11 @@ export class PawnController implements PieceController {
 
     public pieceType = PIECE_TYPES.PAWN;
 
+    constructor(
+        public isBlack: boolean,
+        public selected: boolean
+    ) {}
+
     public getValidMoves(
         selectedPiecePosition: TilePosition,
         piecesPosition: TileInformation[],
@@ -40,7 +45,7 @@ export class PawnController implements PieceController {
                 rank: selectedPiecePosition.rank + operator
             };
             tileString = PositionUtils.getString(tile);
-            if (piecesPosition.some(piece => piece.position === tileString && piece.isBlack !== isBlackTurn)) {
+            if (piecesPosition.some(piece => piece.position === tileString && piece.pieceController.isBlack !== isBlackTurn)) {
                 validMoves.push(tileString);
             }
         });

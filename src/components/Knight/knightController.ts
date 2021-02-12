@@ -7,6 +7,11 @@ export class KnightController implements PieceController {
 
     public pieceType = PIECE_TYPES.KNIGHT;
 
+    constructor(
+        public isBlack: boolean,
+        public selected: boolean
+    ) {}
+
     public getValidMoves(
         selectedPiecePosition: TilePosition,
         piecesPosition: TileInformation[],
@@ -26,7 +31,7 @@ export class KnightController implements PieceController {
                     const tileToMoveString = PositionUtils.getString(tileToMove);
 
                     const pieceOnTile = piecesPosition.find(piece => piece.position === tileToMoveString);
-                    if (!pieceOnTile || (pieceOnTile && pieceOnTile.isBlack !== isBlackTurn)) {
+                    if (!pieceOnTile || (pieceOnTile && pieceOnTile.pieceController.isBlack !== isBlackTurn)) {
                         validMoves.push(tileToMoveString);
                     }
                 });

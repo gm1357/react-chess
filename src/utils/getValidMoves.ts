@@ -14,6 +14,6 @@ export function getValidMoves(
         const movingPiece: PieceController = selectedPieceTile.pieceController;
         return movingPiece.getValidMoves(selectedPiecePosition, piecesPosition, isBlackTurn) ?? ARRAY_OF_TILES;
     } else {
-        return piecesPosition.filter(tile => tile.isBlack === isBlackTurn).map(tile => tile.position);
+        return piecesPosition.filter(tile => tile.pieceController.isBlack === isBlackTurn).map(tile => tile.position);
     }
 }

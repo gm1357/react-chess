@@ -8,10 +8,10 @@ export function isCheck(
     lastPieceMovedPosition: string
 ) {
     const kingPosition = piecesPosition
-        .find(piece => piece.isBlack === isBlackTurn && piece.pieceController.pieceType === PIECE_TYPES.KING)
+        .find(piece => piece.pieceController.isBlack === isBlackTurn && piece.pieceController.pieceType === PIECE_TYPES.KING)
         ?.position;
     const pieceController = piecesPosition
-        .find(piece => piece.isBlack !== isBlackTurn && piece.position === lastPieceMovedPosition)
+        .find(piece => piece.pieceController.isBlack !== isBlackTurn && piece.position === lastPieceMovedPosition)
         ?.pieceController;
 
     if (pieceController !== undefined && kingPosition !== undefined) {

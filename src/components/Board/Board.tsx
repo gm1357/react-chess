@@ -23,14 +23,12 @@ function Board(props: any) {
         if (pieceElementSelected) {
             const pieceSelected = picesPositions.find(piece => piece.position === pieceSelectedPosition);
             if (pieceSelected) {
-                const pieceController = pieceSelected.pieceController;
+                pieceSelected.pieceController.selected = false;
                 const newPiecesPosition = picesPositions.filter(piece => piece.position !== pieceSelectedPosition && piece.position !== position);
                 newPiecesPosition.push({
                     position: position,
                     piece: pieceElementSelected,
-                    pieceController: pieceController,
-                    selected: false,
-                    isBlack: pieceElementSelected.props.isBlack
+                    pieceController: pieceSelected.pieceController
                 });
                 setPiecesPositions(newPiecesPosition);
                 if (pieceSelectedPosition !== position) {
@@ -46,7 +44,7 @@ function Board(props: any) {
                 setPieceSelectedPosition(position);
                 const newPiecesPosition = picesPositions.map(piece => {
                     if (piece.position === position) {
-                        piece.selected = true;
+                        piece.pieceController.selected = true;
                     }
                     return piece;
                 });
@@ -78,7 +76,7 @@ function Board(props: any) {
             pos = (FilesLetters[file] + rank) as keyof typeof picesPositions;
             // eslint-disable-next-line
             const currentTile = picesPositions.find(tile => tile.position === pos);
-            const selected = currentTile?.selected;
+            const selected = currentTile?.pieceController.selected;
             const piece = currentTile?.piece;
 
             tiles.push(

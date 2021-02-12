@@ -8,6 +8,11 @@ export class QueenController implements PieceController {
 
     public pieceType = PIECE_TYPES.QUEEN;
 
+    constructor(
+        public isBlack: boolean,
+        public selected: boolean
+    ) {}
+
     public getValidMoves(
         selectedPiecePosition: TilePosition,
         piecesPosition: TileInformation[],
@@ -15,8 +20,8 @@ export class QueenController implements PieceController {
     ) {
         const validMoves = [];
 
-        validMoves.push(...new RookController().getValidMoves(selectedPiecePosition, piecesPosition, isBlackTurn));
-        validMoves.push(...new BishopController().getValidMoves(selectedPiecePosition, piecesPosition, isBlackTurn));
+        validMoves.push(...new RookController(false, false).getValidMoves(selectedPiecePosition, piecesPosition, isBlackTurn));
+        validMoves.push(...new BishopController(false, false).getValidMoves(selectedPiecePosition, piecesPosition, isBlackTurn));
 
         return validMoves;
     }

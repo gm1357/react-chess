@@ -7,6 +7,11 @@ export class BishopController implements PieceController {
 
     public pieceType = PIECE_TYPES.BISHOP;
 
+    constructor(
+        public isBlack: boolean,
+        public selected: boolean
+    ) {}
+
     public getValidMoves(
         selectedPiecePosition: TilePosition,
         piecesPosition: TileInformation[],
@@ -35,7 +40,7 @@ export class BishopController implements PieceController {
                     pieceOnTile = piecesPosition.find(piece => piece.position === tileToMoveString);
                 }
 
-                if (pieceOnTile && pieceOnTile.isBlack !== isBlackTurn) {
+                if (pieceOnTile && pieceOnTile.pieceController.isBlack !== isBlackTurn) {
                     validMoves.push(tileToMoveString);
                 }
             });

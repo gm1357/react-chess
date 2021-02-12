@@ -7,6 +7,11 @@ export class KingController implements PieceController {
 
     public pieceType = PIECE_TYPES.KING;
 
+    constructor(
+        public isBlack: boolean,
+        public selected: boolean
+    ) {}
+
     public getValidMoves(
         selectedPiecePosition: TilePosition,
         piecesPosition: TileInformation[],
@@ -25,7 +30,7 @@ export class KingController implements PieceController {
                 const pieceOnTile = piecesPosition.find(piece => piece.position === tileToMove);
                 if (!pieceOnTile
                     || (pieceOnTile
-                        && (tileToMove === initialPosition || pieceOnTile.isBlack !== isBlackTurn))) {
+                        && (tileToMove === initialPosition || pieceOnTile.pieceController.isBlack !== isBlackTurn))) {
                     validMoves.push(tileToMove);
                 }
             });
