@@ -5,17 +5,22 @@ import './CheckDisplay.css';
 
 function CheckDisplay(props: any) {
     const [show, setShow] = useState(false);
-    const {isCheck} = props;
+    const {isCheck, isCheckmate} = props;
 
     useEffect(() => {
-        if (isCheck) {
+        if (isCheckmate) {
+            setShow(true);
+            // Don't auto-hide checkmate - game is over
+        } else if (isCheck) {
             setShow(true);
 
             setTimeout(() => {
                 setShow(false)
             }, 2000);
         }
-    }, [isCheck]);
+    }, [isCheck, isCheckmate]);
+
+    const displayText = isCheckmate ? 'CHECKMATE' : 'CHECK';
 
     return (
         <div className="display-wrapper">
@@ -24,7 +29,7 @@ function CheckDisplay(props: any) {
                 unmountOnExit
                 timeout={800}
                 classNames="show-check">
-                <div className="check-display">CHECK</div>
+                <div className={`check-display ${isCheckmate ? 'checkmate' : ''}`}>{displayText}</div>
             </CSSTransition>
         </div>
     );

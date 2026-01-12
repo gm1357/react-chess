@@ -33,3 +33,10 @@
     opacity: 0;
     transition: opacity 800ms;
 }
+
+.check-display.checkmate {
+    background-color: #d32f2f;
+    color: white;
+    border-top: 4px solid #b71c1c;
+    border-bottom: 4px solid #ef5350;
+}

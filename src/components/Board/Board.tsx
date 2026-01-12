@@ -1,34 +1,42 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import './Board.css';
-import Tile from '../Tile';
-import { FilesLetters, INITIAL_POSITIONS } from '../../constants';
-import { TileInformation } from '../../models';
-import { getValidMoves } from '../../utils';
-import { useWindowSize } from '../../hooks/useWindowSize';
-import { isCheck } from '../../utils/isCheck';
+import "./Board.css";
+import Tile from "../Tile";
+import { FilesLetters, INITIAL_POSITIONS } from "../../constants";
+import { TileInformation } from "../../models";
+import { getValidMoves, isCheckmate } from "../../utils";
+import { useWindowSize } from "../../hooks/useWindowSize";
+import { isCheck } from "../../utils/isCheck";
 
 function Board(props: any) {
     const size = useWindowSize();
     const maximumSideSize = Math.min(size.width ?? 0, size.height ?? 0) * 0.8;
-    const [pieceElementSelected, setPieceElementSelected] = useState<JSX.Element | null>(null);
-    const [pieceSelectedPosition, setPieceSelectedPosition] = useState('');
-    const [picesPositions, setPiecesPositions] = useState<TileInformation[]>(INITIAL_POSITIONS);
-    const [lastMovePosition, setLastMovePosition] = useState('');
-    const {setCheck, isBlackTurn} = props;
+    const [pieceElementSelected, setPieceElementSelected] =
+        useState<JSX.Element | null>(null);
+    const [pieceSelectedPosition, setPieceSelectedPosition] = useState("");
+    const [picesPositions, setPiecesPositions] =
+        useState<TileInformation[]>(INITIAL_POSITIONS);
+    const [lastMovePosition, setLastMovePosition] = useState("");
+    const { setCheck, setCheckmate, isBlackTurn } = props;
     let isBlackTile = true;
     const tiles = [];
 
     const handleClick = (position: string, piece: any) => {
         if (pieceElementSelected) {
-            const pieceSelected = picesPositions.find(piece => piece.position === pieceSelectedPosition);
+            const pieceSelected = picesPositions.find(
+                (piece) => piece.position === pieceSelectedPosition
+            );
             if (pieceSelected) {
                 pieceSelected.pieceController.selected = false;
-                const newPiecesPosition = picesPositions.filter(piece => piece.position !== pieceSelectedPosition && piece.position !== position);
+                const newPiecesPosition = picesPositions.filter(
+                    (piece) =>
+                        piece.position !== pieceSelectedPosition &&
+                        piece.position !== position
+                );
                 newPiecesPosition.push({
                     position: position,
                     piece: pieceElementSelected,
-                    pieceController: pieceSelected.pieceController
+                    pieceController: pieceSelected.pieceController,
                 });
                 setPiecesPositions(newPiecesPosition);
                 if (pieceSelectedPosition !== position) {
@@ -37,12 +45,12 @@ function Board(props: any) {
                 }
             }
             setPieceElementSelected(null);
-            setPieceSelectedPosition('');
+            setPieceSelectedPosition("");
         } else {
             if (piece) {
                 setPieceElementSelected(piece);
                 setPieceSelectedPosition(position);
-                const newPiecesPosition = picesPositions.map(piece => {
+                const newPiecesPosition = picesPositions.map((piece) => {
                     if (piece.position === position) {
                         piece.pieceController.selected = true;
                     }
@@ -55,18 +63,22 @@ function Board(props: any) {
 
     const validMoves = getValidMoves(
         picesPositions,
-        picesPositions.find(piece => piece.position === pieceSelectedPosition),
+        picesPositions.find(
+            (piece) => piece.position === pieceSelectedPosition
+        ),
         props.isBlackTurn
     );
 
     useEffect(() => {
-        setCheck(
-            isCheck(
-                picesPositions,
-                isBlackTurn,
-                lastMovePosition
-            )
-        );
+        const inCheck = isCheck(picesPositions, isBlackTurn, lastMovePosition);
+        setCheck(inCheck);
+
+        if (inCheck) {
+            const checkmate = isCheckmate(picesPositions, isBlackTurn);
+            setCheckmate(checkmate);
+        } else {
+            setCheckmate(false);
+        }
     });
 
     let pos: keyof typeof picesPositions;
@@ -75,7 +87,9 @@ function Board(props: any) {
         for (let file = 0; file < 8; file++) {
             pos = (FilesLetters[file] + rank) as keyof typeof picesPositions;
             // eslint-disable-next-line
-            const currentTile = picesPositions.find(tile => tile.position === pos);
+            const currentTile = picesPositions.find(
+                (tile) => tile.position === pos
+            );
             const selected = currentTile?.pieceController.selected;
             const piece = currentTile?.piece;
 
@@ -88,7 +102,8 @@ function Board(props: any) {
                     // eslint-disable-next-line
                     isValid={validMoves?.some((tile: any) => tile === pos)}
                     pieceSelected={pieceElementSelected !== null}
-                    handleClick={handleClick}>
+                    handleClick={handleClick}
+                >
                     {piece}
                 </Tile>
             );
@@ -97,7 +112,10 @@ function Board(props: any) {
     }
 
     return (
-        <div className="board" style={{width: maximumSideSize, height: maximumSideSize}}>
+        <div
+            className="board"
+            style={{ width: maximumSideSize, height: maximumSideSize }}
+        >
             {tiles}
         </div>
     );
